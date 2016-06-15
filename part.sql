@@ -1,0 +1,7 @@
+CREATE TABLE part (
+  idPart INTEGER NOT NULL PRIMARY KEY,
+  idInvestor INTEGER NOT NULL,
+  numProject INTEGER NOT NULL,
+  price FLOAT NOT NULL,
+  date DATE NOT NULL
+);
