@@ -1,6 +1,6 @@
 <?php
 
-class MediaProject extends Project{
+class MediaProject extends ProjectClass{
   
   private var $support;
   private var $type;
