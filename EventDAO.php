@@ -37,3 +37,4 @@ class EventDAO extends ProjectDAO{
    }
   }
 }
+?>
