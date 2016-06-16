@@ -1,6 +1,6 @@
 <?php
 include "Database.php";
-abstract class ProjectDAO {
+/* abstract */class ProjectDAO {
 	public static function create($project){ 
 		$sql = "INSERT INTO Project(name,startDate,description,endDate,rate,status) values(:name,:startDate,:description,:endDate,:rate,:status)";
 		$db=Database::getInstance(); // Recupere la base de données.
