@@ -1,5 +1,6 @@
 <?php
-public class Event{
+include "MediaProjectDAO.php";
+public class Event extends Project{
   private $location;
   private $dateTime;
 
