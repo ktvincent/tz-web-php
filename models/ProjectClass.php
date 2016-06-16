@@ -1,25 +1,27 @@
 <?php
 include "ProjectDAO.php";
-abstract class ProjectClass /*extends Model*/ {
+ class ProjectClass /*extends Model*/ {
 	
-	private $name,$startDate,$description,$endDate,$rate,$Status;
+	protected $name,$startDate,$description,$endDate,$rate,$Status,$classe;
 
-	function __construct ($name,$startDate,$description,$endDate,$rate,$status){
+	function __construct ($name,$startDate,$description,$endDate,$rate,$stats,$classe){
 		$this->name=$name;
 		$this->startDate=$startDate;
 		$this->description=$description;
 		$this->endDate=$endDate;
 		$this->rate=$rate;
-		$this->status=$status;
+		$this->stats=$stats;
+		$this->classe=$classe;
 	}
 	public function __toString(){
-		echo "<table>";
-		echo "<tr><td>Name</td><td>".$this->name."</td></tr>";
-		echo "<tr><td>starDate</td><td>".$this->startDate."</td></tr>";
-		echo "<tr><td>description</td><td>".$this->description."</td></tr>";
-		echo "<tr><td>endDate</td><td>".$this->endDate."</td></tr>";
-		echo "<tr><td>rate</td><td>".$this->rate."</td></tr>";
-		echo "<tr><td>status</td><td>".$this->status."</td></tr>";
+		print "<table>";
+		print "<tr><td>Name</td><td>".$this->name."</td></tr>";
+		print "<tr><td>starDate</td><td>".$this->startDate."</td></tr>";
+		print "<tr><td>description</td><td>".$this->description."</td></tr>";
+		print "<tr><td>endDate</td><td>".$this->endDate."</td></tr>";
+		print "<tr><td>rate</td><td>".$this->rate."</td></tr>";
+		print "<tr><td>status</td><td>".$this->stats."</td></tr>";
+		print "<tr><td>classe</td><td>".$this->classe."</td></tr>";
 		return "</table>";;
   }
 	public function getName(){
@@ -52,15 +54,22 @@ abstract class ProjectClass /*extends Model*/ {
 	public function setRate($new){
 		$this->rate=$new;
 	}
-	public function getStatus(){
-		return $this->status;
+	public function getStats(){
+		return $this->stats;
 	}
-	public function setStatus($new){
-		$this->status=$new;
+	public function setStats($new){
+		$this->stats=$new;
+	}
+	 public function getClasse(){
+		return $this->classe;
+	}
+	public function setClasse($new){
+		$this->classe=$new;
 	}
 }
 
-/*$projet=new ProjectClass("Lui","1990-01-01","il","1990-01-01",5,true);
+$projet=new ProjectClass("Lui","1990-01-01","il","1990-01-01",5,true,"media");
+/*
 echo $projet->getName();
 echo $projet->getRate();
 echo ProjectDAO::Create($projet);
@@ -68,6 +77,6 @@ $list=ProjectDAO::getList();
 foreach($list as $test):
 	echo "<br>".$test['name'];
 endforeach;
-ProjectDAO::changeStatus(30,true);  
-echo $projet; Données test*/
+ProjectDAO::changeStatus(30,true); */ 
+echo $projet; 
 ?>
