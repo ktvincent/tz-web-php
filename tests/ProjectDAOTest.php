@@ -7,7 +7,7 @@ class ProjectDAOTest extends PHPUnit_Framework_TestCase	{
 	public function testGetList()	{
 		$object = new ProjectDAO();
 		$test = $object::getList();
-		$this->asserNull($test);
+		$this->assertNull($test);
 	}
 }	
 
