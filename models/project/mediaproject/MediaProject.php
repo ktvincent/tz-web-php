@@ -1,5 +1,5 @@
 <?php
-
+include "MediaProjectDAO.php";
 class MediaProject extends ProjectClass{
   
   private var $support;
@@ -8,8 +8,8 @@ class MediaProject extends ProjectClass{
   private var $differentTypes = array('video','son');
   private var $differentSupports = array('numeric','cd','dvd');
   
-  public function __construct($name,$startDate,$description,$endDate,$support,$type){
-    parent::_construct($name,$startDate,$description,$endDate);
+  public function __construct($name,$startDate,$description,$endDate,$rate,$status,$support,$type){
+    parent::_construct($name,$startDate,$description,$endDate,$rate,$status);
     $this->setSupport($support);
     $this->setType($type);
   }
