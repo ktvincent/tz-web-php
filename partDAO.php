@@ -34,6 +34,7 @@ class partDAO {
 			':price'=>$price,
 			':date'=>$date
 		);
+		return $idPart;
 		
 	}
 	
