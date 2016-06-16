@@ -23,18 +23,18 @@ class partDAO {
 		return $stmt->fetch;
 	}
 	
-	public static function createPart($idPart,$idInvestor,$numProject,$price,$date) {
+	public static function createPart($part) {
 		$db = new PDO('mysql:host=dwarves.iut-fbleau.fr;dbname=carlu', 'carlu', 'ludo1811');
 		$sql = "INSERT INTO part VALUES (:idPart,:idInvestor,:numProject,:price,:date)";
 		$stmt = $db->prepare($sql);
 		$stmt->execute (
-			':idPart'=>$idPart,
-			':idInvestor'=>$idInvestor,
-			':numProject'=>$numProject,
-			':price'=>$price,
-			':date'=>$date
+			':idPart'=>$part->idPart,
+			':idInvestor'=>$part->idInvestor,
+			':numProject'=>$part->numProject,
+			':price'=>$part->price,
+			':date'=>$part->date
 		);
-		return $idPart;
+		return $$part->idPart;
 		
 	}
 	
