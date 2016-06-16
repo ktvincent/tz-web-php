@@ -1,5 +1,5 @@
 <?php
-class DAOevent extends DAOProject{
+class EventDAO extends ProjectDAO{
   protected $db;
   
   public function __construct(){
