@@ -1,11 +1,11 @@
 <?php 
 
 class partDAO {
-  
+
 	public static function getListPart() {
 		$db = new PDO('mysql:host=dwarves.iut-fbleau.fr;dbname=carlu', 'carlu', 'ludo1811');
     $sql = "SELECT * FROM part";
-		$stmt = $this->db->query($sql);
+		$stmt = $db->query($sql);
 		return $stmt->fetchAll;
   }
 	
