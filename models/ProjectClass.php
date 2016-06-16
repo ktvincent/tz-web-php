@@ -1,6 +1,6 @@
 <?php
 include "ProjectDAO.php";
-class ProjectClass /*extends Model*/ {
+abstract class ProjectClass /*extends Model*/ {
 	
 	private $name,$startDate,$description,$endDate,$rate,$Status;
 
