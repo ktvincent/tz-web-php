@@ -6,10 +6,18 @@ class PartDAO {
 	public static function getListPart() {
 		$db = Database::getInstance();
     $sql = "SELECT * FROM Part";
-		$stmt = $db->prepare($sql);
-		$stmt->execute();
-		$list = $stmt->fetch;
-		print_r($list);
+		$stmt = $db->query($sql);
+		//$stmt->execute();
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
+		$listPart = array();
+		while (($row = $stmt->fetch()) !== false) {
+			$part = new PartClass($row['idPart'],$row['mail'],$row['idProject'],$row['price'],$row['date']);
+			$listPart[] = $part;
+      print_r($part);
+      print_r('<br>');
+		}
+		return $listPart;
+		
 		//return un tableau de part
 		
   }
@@ -31,9 +39,14 @@ class PartDAO {
     $sql = "SELECT * FROM Part WHERE mail= :mail";
 		$stmt = $db->prepare($sql);
 		$stmt->execute(array(':mail'=>$mail));
-		$res = $stmt->fetch();
-		$part = new PartClass($res['idPart'],$res['mail'],$res['idProject'],$res['price'],$res['date']);
-		return $part;
+		$listPart = array();
+		while (($row = $stmt->fetch()) !== false) {
+			$part = new PartClass($row['idPart'],$row['mail'],$row['idProject'],$row['price'],$row['date']);
+			$listPart[] = $part;
+      print_r($part);
+      print_r('<br>');
+		}
+		return $listPart;
 	}
 	
 	public static function createPart($part) {

@@ -73,5 +73,6 @@ $part->setMailInvestor("ozozoz");
 echo $part;*/
 
 PartDAO::getListPart();
+PartDAO::getPartFromMailInvestor("zozo@hotmail.fr");
 
 ?>
