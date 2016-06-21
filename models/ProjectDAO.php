@@ -1,8 +1,8 @@
 <?php
 include "Database.php";
-class ProjectDAO {
+/* abstract */class ProjectDAO {
 	public static function create($project){ 
-		$sql = "INSERT INTO Project(name,startDate,description,endDate,rate,status) values(:name,:startDate,:description,:endDate,:rate,:status)";
+		$sql = "INSERT INTO Project(name,startDate,description,endDate,rate,stats,classe) values(:name,:startDate,:description,:endDate,:rate,:status,:classe)";
 		$db=Database::getInstance(); // Recupere la base de données.
 		$stmt = $db->prepare($sql);
 		$stmt->setFetchMode(PDO::FETCH_CLASS, "Project");
@@ -11,16 +11,19 @@ class ProjectDAO {
 			":description"=>$project->getDescription(),
      	":endDate"=>$project->getEndDate(),
 			":rate"=>$project->getRate(),
+			":classe"=>$project->getClasse(),
 			":status"=>$project->getStatus()));
 	  	return $db->lastInsertId();
 	}
 	public static function getFromId( $id ){
-		$sql = "SELECT * FROM Project WHERE id=:id";
+		$sql = "SELECT * FROM Project WHERE idProject=:id";
 		$db=Database::getInstance();
 		$stmt = $db->prepare($sql);
 		$stmt->setFetchMode(PDO::FETCH_CLASS, "Project");
-		$stmt->execute(array(":id" => $id));
-		return $stmt->fetch();
+		$stmt->execute(array(":idProject" => $id));
+		$res=$stmt->fetch();
+		$obj=ProjectClass::new Project($res['name'],$res['startDate'],$res['description'],$res['endDate'],$res['stats'],$res['classe']);
+		return $obj;
 	}
 	public static function getFromName( $name ){
 		$sql = "SELECT * FROM Project WHERE name=:name";
