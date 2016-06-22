@@ -1,81 +1,61 @@
 <?php
-include "DAOsurfer.php";
-class DAOartist extends DAOsurfer{
-  protected $db;
+include_once "DAOsurfer.php";
+include_once "Database.php";
+class DAOartist{
 
-  public function __construct() { 
-   $this->db = Database::getInstance();
-  }
- 
- public function insertArtist($mail,$name,$firstname,$pseudo ){
-  $surfer = $this->getFromEmailSurfer($mail);
-  if($surfer != FALSE){
-    $passwrd = $surfer['passwrd'];
-  $sql = "INSERT into Artist values(:mail,:passwrd, :name, :firstname, :pseudo)";
-  $stmt = $this->db->prepare($sql);
-  $stmt->setFetchMode(PDO::FETCH_CLASS, "Artist");
-  return $stmt->execute(array(
-   ":mail" => $mail,
-   ":passwrd" => $passwrd,
-    ":name" => $name,
-    ":firstname" => $firstname,
-    ":pseudo" => $pseudo));
-  }
-   return false;
- }
- 
- public function deleteArtist($mail){
-  $sql = "DELETE from Artist where mail=:mail";
-  $stmt = $this->db->prepare($sql);
-  $stmt->setFetchMode(PDO::FETCH_CLASS, "Artist");
-  return $stmt->execute(array(
-   ":mail"=>$mail));
- }
- 
- public function updatePasswordFromEmail($mail,$passwrd){                                                                                                  
-  $sql = "UPDATE Artist set passwrd=:passwrd WHERE mail = :mail";
-  $stmt = $this->db->prepare($sql);
-  return $stmt->execute(array(
-   ":mail"=>$mail,
-   ":passwrd"=>$passwrd));
+  public static function insertArtist($artist){
+    $surfer = DAOsurfer::getSurferFromMail($artist->getMail());
+    if($surfer != ""){
+      $sql = "INSERT into Artist values(:mail,:description)";
+      $db = Database::getInstance();
+      $stmt = $db->prepare($sql);
+      $stmt->setFetchMode(PDO::FETCH_CLASS, "Artist");
+      $stmt->execute(array(
+      ":mail" => $mail,
+      ":description" => $artist->getDescription()));
+      return $artist->getMail();
+    }
+    return false;
  }
   
- public function updateNameFromEmail($mail,$name){                                                                                                  
-  $sql = "UPDATE Artist set name=:name WHERE mail = :mail";
-  $stmt = $this->db->prepare($sql);
-  return $stmt->execute(array(
-   ":mail"=>$mail,
-   ":name"=>$name));
- }
+  public static function deleteArtist($mail){
+    $sql = "DELETE from Artist where mail=:mail";
+    $db = Database::getInstance();
+    $stmt = $db->prepare($sql);
+    $stmt->setFetchMode(PDO::FETCH_CLASS, "Artist");
+    $stmt->execute(array(":mail"=>$mail));
+    $count = $stmt->rowCount();
+		return $count;
+  }
  
- public function updateFirstnameFromEmail($mail,$firstname){                                                                                                  
-  $sql = "UPDATE Artist set firstname=:firstname WHERE mail = :mail";
-  $stmt = $this->db->prepare($sql);
-  return $stmt->execute(array(
-   ":mail"=>$mail,
-   ":firstname"=>$firstname));
- }
-  
- public function updatePseudoFromEmail($mail,$pseudo){                                                                                                  
-  $sql = "UPDATE Artist set pseudo=:pseudo WHERE mail = :mail";
-  $stmt = $this->db->prepare($sql);
-  return $stmt->execute(array(
-   ":mail"=>$mail,
-   ":pseudo"=>$pseudo));
- }
+  public static function updateDescriptionFromMail($mail,$description){                                                                                                  
+    $sql = "UPDATE Artist set description=:description WHERE mail = :mail";
+    $db = Database::getInstance();
+    $stmt = $db->prepare($sql);
+    $stmt->execute(array(
+    ":mail"=>$mail,
+    ":description"=>$description));
+    $count = $stmt->rowCount();
+		return $count;
+  }
 
- public function getFromEmail($mail){
-  $sql = "SELECT * FROM Artist WHERE mail = :mail";
-  $stmt = $this->db->prepare($sql);
-  $stmt->setFetchMode(PDO::FETCH_CLASS, "Artist");
-  $stmt->execute(array(":mail" => $mail));
-  return $stmt->fetch();
- }
- public function getList(){
-  $sql = "SELECT * FROM Artist";
-  $stmt = $this->db->query($sql);
-  $stmt->setFetchMode(PDO::FETCH_CLASS, "Artist");
-  return $stmt->fetchAll();
- }
+  public static function getArtistFromMail($mail){
+    $sql = "SELECT * FROM Artist WHERE mail = :mail";
+    $db = Database::getInstance();
+    $stmt = $db->prepare($sql);
+    $stmt->setFetchMode(PDO::FETCH_CLASS, "Artist");
+    $stmt->execute(array(":mail" => $mail));
+    $res=$stmt->fetch();
+	  $artist=new Artist($res['mail'],$res['description']);
+	  return $artist;
+  }
+  
+  public static function getArtistList(){
+    $sql = "SELECT * FROM Artist";
+    $db = Database::getInstance();
+    $stmt = $db->query($sql);
+    $stmt->setFetchMode(PDO::FETCH_CLASS, "Artist");
+    return $stmt->fetchAll();
+  }
 }
 ?>
