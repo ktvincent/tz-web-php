@@ -24,9 +24,9 @@ class Database {
   
   protected function __construct() {
 		$this->_db = new PDO(
-		  "mysql:host=dwarves.iut-fbleau.fr;dbname=carlu;charset=utf8",
-		  "carlu",
-			"ludo1811"
+		  "mysql:host=dwarves.iut-fbleau.fr;dbname=nguyen;charset=utf8",
+		  "nguyen",
+			"nguyenphpmyadmin"
 		);
 	}
 }
