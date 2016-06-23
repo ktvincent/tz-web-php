@@ -1,38 +1,27 @@
 <?php
-class Artist extends Surfer{
-  private $name;
-  private $firstname;
-  private $pseudo;
+class Artist{
+  private $mail;
+  private $description;
   
-  public function __construct($name,$firstname,$pseudo) {
-    parent::__construct();
-    $this->name = $name;
-    $this->firstname = $firstname;
-    $this->pseudo = $pseudo;
+  public function __construct($mail,$description){
+    $this->mail = $mail;
+    $this->description = $description;
   }
     
-  public function getName(){
-    return $this->name;
+  public function getDescription(){
+    return $this->description;
   }
   
-  public function getFirstName(){
-    return $this->firstname;
+  public function getMail(){
+    return $this->mail;
+  }
+ 
+  public function setDescription($description){
+    $this->description=$description;
   }
   
-  public function getPseudo(){
-    return $this->pseudo;
-  }
-  
-  public function setName($name) {                                                                                                  
-    $this->name=$name;
-  }
-  
-  public function setFirstName($firstname){
-    $this->firstname=$firstname;
-  }
-  
-  public function setPseudo($pseudo){
-    $this->pseudo=$pseudo;
+  public function setMail($mail){
+    $this->mail=$mail;
   }
 }
 ?>
