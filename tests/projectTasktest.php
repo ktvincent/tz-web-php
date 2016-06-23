@@ -4,17 +4,16 @@ use PHPUnit\Framework\TestCase;
 
 class ProjectTasktest extends PHPUnit_Framework_TestCase	
 {
-   private $idTask;
-   private $idProject=1;
-   private $attendee=5;
-   private $description="TaskDescription";
-   private $title ="NewTask";
-   private $price=5.2;
-   private $duration="23:12:00";
-   private $status="updating";
-   private $percent=58.25;
-  
-  
+ private $idTask;
+ private $idProject=1;
+ private $attendee=5;
+ private $description="TaskDescription";
+ private $title ="NewTask";
+ private $price=5.2;
+ private $duration="23:12:00";
+ private $status="updating";
+ private $percent=58.25;
+    
   public function testCreateTask(){
     $task = new projectTask($this->idProject,
                             $this->attendee,
@@ -30,11 +29,7 @@ class ProjectTasktest extends PHPUnit_Framework_TestCase
     $this->assertInternaltype("int",$taskDAO);
     $this->idTask=$taskDAO;
   }
-  
-  
-  
-  
-  
+    
   public function testUpdateTask(){
     $task = new projectTaskDAO();
     $id = $this->idProject;
